@@ -1,1 +1,1 @@
-# tyler-the-creator-webring
+# the webring for tyler the creator fans
