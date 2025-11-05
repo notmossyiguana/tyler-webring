@@ -1,0 +1,26 @@
+// site: SITE
+// name: TEMPLATE
+// blurb: BLURB
+// button: BUTTON
+
+---
+
+name: mossy
+site: https://mossyscorner.neocities.org/
+blurb: THE RINGMASTER MUAHAHAHA
+button: mossy_image.png
+
+name: test
+site: https://example.com
+blurb: This is a blurb example
+button:
+
+name: test
+site: https://example.com
+blurb: This is a blurb example
+button:
+
+name: test
+site: https://example.com
+blurb: This is a blurb example
+button:
