@@ -4,6 +4,7 @@
 You can either:
 
 **Option 1 — GitHub Method**
+
 Make a pull request to merge `members.json`, and copy this template in:
 
 ```
@@ -14,6 +15,7 @@ button: https://example.com/examplebutton.png (or leave blank)
 ```
 
 **Option 2 — Email Method**
+
 Send an email to **tylerwebring [at] duck [dot] com**
 with the subject line: **"Application"**
 
