@@ -21,7 +21,7 @@ with the subject line: **"Application"**
 
 Your email should include:
 
+* Your slug/name or alias
 * Your site name
-* Your slug or alias
 * A short blurb describing your website (1–2 sentences)
 * Your website’s button (optional)
