@@ -9,12 +9,12 @@ send an email to
 tylerwebring [at] duck [dot] com
 
 with the subject "Application"
-this should include:
+this email should include:
 
-your site name
+- your site name
 
-your slug/name (or alias)
+- your slug/name (or alias)
 
-a small blurb describing your website (1-2 sentances)
+- a small blurb describing your website (1-2 sentances)
 
-your website's button (optional)
+- your website's button (optional)
