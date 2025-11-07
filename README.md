@@ -5,5 +5,13 @@ make a pull request to merge members.json
 
 or 
 
-send an email to tylerwebring [at] duck [dot] com with the subject "Application"
-with your name or alias, website button (optional), website link, and a small blurb about your site
+send an email to 
+tylerwebring [at] duck [dot] com 
+
+with the subject "Application"
+this should include:
+
+your site name
+your slug/name (or alias)
+a small blurb describing your website (1-2 sentances)
+your website's button (optional)
