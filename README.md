@@ -5,9 +5,14 @@ make a pull request to merge members.json, and copy this template in:
 
 
 name: test
+
 site: https://example.com
+
 blurb: This is a blurb example
+
 button:
+
+
 
 or 
 
