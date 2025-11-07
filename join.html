@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Join — Tyler the Creator Webring</title>
+  <link rel="icon" href="images/icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <img src="images/title.gif" alt="Tyler title" style="height:56px">
+    </header>
+
+    <nav>
+      <a class="box" href="webring.html">Home</a>
+      <a class="box" href="join.html">Join</a>
+      <a class="box" href="members.html">Members</a>
+    </nav>
+
+    <section class="panel">
+      <h2>Before you apply</h2>
+      <p class="muted">
+        Make sure your site has a visible widget or button. Read the rules below. All applications are reviewed manually.
+      </p>
+      <h3>Rules</h3>
+      <ul>
+        <li>Fan content only. No harassment or targeted abuse.</li>
+        <li>Keep a visible widget or link on your site.</li>
+        <li>No commercial spam or malware.</li>
+      </ul>
+    </section>
+        <h3>Embed the widget</h3>
+        <div class="widgets">
+          <div>
+          <script src="https://notmossyiguana.github.io/tyler-webring/ring.js"></script>
+            <textarea readonly>&lt;script src="https://notmossyiguana.github.io/tyler-webring/ring.js">&lt;/script></textarea>
+            <p class="muted">Place this where you want the webring widget to appear.</p>
+          </div>
+        </div>
+    <section class="panel">
+      <h2>Application</h2>
+      <p class="muted">
+        Send an email to <strong>tylerwebring [at] duck [dot] com</strong> with subject “Application”.
+        <p>
+You can also make a direct pull request on our <a href="https://github.com/notmossyiguana/tyler-webring" target="_blank">Github</a>.
+      </p>
+      <textarea id="tmpl" rows="4" readonly>
+Your site name
+Your slug/name (or alias)
+A small blurb describing your website (1-2 sentances)
+Your website's button (optional)
+</textarea>
+
+      
+    </section>
+
+    <section class="panel">
+      <h3>If accepted</h3>
+      <p class="muted">
+        You will be added to the member list. We can host button images if needed. To change or remove your listing later, email with subject “Info Change”.
+      </p>
+    </section>
+
+    <footer>
+      <div class="muted">Fan-run webring. No official affiliation.</div>
+    </footer>
+  </div>
+
+  <script>
+    function copyTemplate() {
+      const t = document.getElementById('tmpl');
+      t.select();
+      try {
+        navigator.clipboard.writeText(t.value);
+        alert('Template copied. Paste it into your email.');
+      } catch(e) {
+        alert('Copy failed. Select and copy manually.');
+      }
+    }
+  </script>
+</body>
+</html>
