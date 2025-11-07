@@ -3,7 +3,7 @@
 **Want to join?**
 You can either:
 
-**Option 1 — GitHub Method**
+**Option 1 — GitHub**
 
 Make a pull request to merge `members.json`, and copy this template in:
 
@@ -14,7 +14,7 @@ blurb: This is a blurb example
 button: https://example.com/examplebutton.png (or leave blank)
 ```
 
-**Option 2 — Email Method**
+**Option 2 — Email**
 
 Send an email to **tylerwebring [at] duck [dot] com**
 with the subject line: **"Application"**
