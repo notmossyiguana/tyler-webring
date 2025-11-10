@@ -15,7 +15,7 @@ Make a pull request to merge `members.json`, and copy this template in:
    "button": https://example.com/examplebutton.png (or leave blank)
 }
 ```
-Remember to add a comma on the previous member.
+Remember to add a comma on the previous member!
 
 **Option 2 — Email**
 
