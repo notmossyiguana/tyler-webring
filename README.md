@@ -8,10 +8,12 @@ You can either:
 Make a pull request to merge `members.json`, and copy this template in:
 
 ```
-name: example
-site: https://example.com
-blurb: This is a blurb example
-button: https://example.com/examplebutton.png (or leave blank)
+{
+   "name": example
+   "site": https://example.com
+   "blurb": This is a blurb example
+   "button": https://example.com/examplebutton.png (or leave blank)
+}
 ```
 
 **Option 2 — Email**
