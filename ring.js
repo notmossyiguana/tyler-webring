@@ -15,11 +15,19 @@
 		// PREV and NEXT are replaced with neighbors' urls
 		widgets: {
 			default: `
-				<div id="tyler-ring" style="display: flex; align-items: center; gap: 3.278%; max-width: 244px; image-rendering: smooth">
-					<a href="PREV" target="_top" style="width: 12.295%"><img width="100%" src="https://mossyscorner.neocities.org/widget/right.svg" alt="previous site"></a>
-					<a href="https://mossyscorner.neocities.org/webring" target="_top" style="width: 68.852%"><img width="100%" src="https://mossyscorner.neocities.org/widget/button.svg" alt="tyler the creator webring"></a>
-					<a href="NEXT" target="_top" style="width: 12.295%"><img width="100%" src="https://mossyscorner.neocities.org/widget/left.svg" alt="next site"></a>
-				</div>
+				<div style="text-align:center;">
+      <div id="tyler-ring" style="display: flex; align-items: center; justify-content: center; gap: 3.278%; max-width: 244px; margin: 0 auto; image-rendering: smooth;">
+        <a href="PREV" target="_top" style="width: 12.295%">
+          <img width="100%" src="https://mossyscorner.neocities.org/widget/right.svg" alt="previous site">
+        </a>
+        <a href="https://mossyscorner.neocities.org/webring" target="_top" style="width: 68.852%">
+          <img width="100%" src="https://mossyscorner.neocities.org/widget/button.svg" alt="tyler the creator webring">
+        </a>
+        <a href="NEXT" target="_top" style="width: 12.295%">
+          <img width="100%" src="https://mossyscorner.neocities.org/widget/left.svg" alt="next site">
+        </a>
+      </div>
+    </div>
 			`,
 			error: `<div>
 				<a href="https://mossyscorner.neocities.org/webring" target="_top"><img src="https://mossyscorner.neocities.org/widget/button.png"></a>
