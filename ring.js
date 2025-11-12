@@ -9,7 +9,8 @@
 		sites: [
 			"mossyscorner.neocities.org",
 			"jugproductions.neocities.org",
-			"decahedron.neocities.org"
+			"decahedron.neocities.org",
+			"oddfuturegirl.hotglue.me/?home"
 		],
 		// widget html
 		// PREV and NEXT are replaced with neighbors' urls
