@@ -29,9 +29,13 @@
 		},
 	};
 	// code
-webring.idx = webring.sites.findIndex(site =>
-  location.hostname.replace(/^www\./, "").toLowerCase() === site.toLowerCase()
-);
+webring.idx = webring.sites.findIndex(site => {
+  const current = (location.hostname + location.pathname + location.search)
+    .replace(/^www\./, "")
+    .toLowerCase();
+  return current === site.toLowerCase();
+});
+
 	document.currentScript.outerHTML = webring.idx === -1 ? webring.widgets.error :
 		(webring.widgets[document.currentScript.dataset.widget] ?? webring.widgets.default)
 		.replace("PREV", "https://" + webring.sites.at(webring.idx - 1))
