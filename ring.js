@@ -8,7 +8,8 @@
 		// remove the https://
 		sites: [
 			"mossyscorner.neocities.org",
-			"jugproductions.neocities.org"
+			"jugproductions.neocities.org",
+			"decahedron.neocities.org"
 		],
 		// widget html
 		// PREV and NEXT are replaced with neighbors' urls
