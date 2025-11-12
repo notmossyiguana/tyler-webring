@@ -33,7 +33,7 @@ webring.idx = webring.sites.findIndex(site => {
   const current = (location.hostname + location.pathname + location.search)
     .replace(/^www\./, "")
     .toLowerCase();
-  return current === site.toLowerCase();
+return current.includes(site.toLowerCase());
 });
 
 	document.currentScript.outerHTML = webring.idx === -1 ? webring.widgets.error :
