@@ -11,6 +11,7 @@
 			"jugproductions.neocities.org",
 			"decahedron.neocities.org",
 			"oddfuturegirl.hotglue.me/?home"
+			"dazaisfunpalace.nekoweb.org"
 		],
 		// widget html
 		// PREV and NEXT are replaced with neighbors' urls
