@@ -31,11 +31,11 @@
 	};
 	// code
 webring.idx = webring.sites.findIndex(site => {
-  const current = (location.hostname + location.pathname + location.search)
-    .replace(/^www\./, "")
-    .toLowerCase();
-return current.includes(site.toLowerCase());
+  const current = location.hostname.replace(/^www\./, "").toLowerCase();
+  const target = site.split("/")[0].toLowerCase();
+  return current === target;
 });
+
 
 	document.currentScript.outerHTML = webring.idx === -1 ? webring.widgets.error :
 		(webring.widgets[document.currentScript.dataset.widget] ?? webring.widgets.default)
