@@ -1,4 +1,4 @@
-const sites =
+[
   {
     "name": "mossy",
     "site": "https://mossyscorner.neocities.org/",
@@ -29,3 +29,4 @@ const sites =
     "blurb": "silly site for my silly doings",
     "button": "dazai.gif"
   }
+]
