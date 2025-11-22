@@ -10,7 +10,7 @@
 			"mossyscorner.neocities.org",
 			"jugproductions.neocities.org",
 			"decahedron.neocities.org",
-			"oddfuturegirl.hotglue.me/?home"
+			"oddfuturegirl.hotglue.me/?home",
 			"dazaisfunpalace.nekoweb.org"
 		],
 		// widget html
