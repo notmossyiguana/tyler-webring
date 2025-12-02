@@ -5,7 +5,8 @@
       "jugproductions.neocities.org",
       "decahedron.neocities.org",
       "oddfuturegirl.hotglue.me/?home",
-      "dazaisfunpalace.nekoweb.org"
+      "dazaisfunpalace.nekoweb.org",
+      "mewsdiary.nekoweb.org" 
     ],
     widgets: {
       default: `
