@@ -1,5 +1,5 @@
-// webring widget script — made from webstring by juneish - modified by mossy
-
+// webring widget script — fixes matching for /home (and still tolerates ?home)
+// made from webstring by juneish - modified by mossy
 (function () {
   'use strict';
 
@@ -8,7 +8,8 @@
       "mossyscorner.neocities.org",
       "jugproductions.neocities.org",
       "decahedron.neocities.org",
-      "oddfuturegirl.hotglue.me/?home",
+      // changed to use /home (you asked). matching logic supports both /home and ?home.
+      "oddfuturegirl.hotglue.me/home",
       "dazaisfunpalace.nekoweb.org",
       "mewsdiary.nekoweb.org"
     ],
@@ -28,12 +29,22 @@
   };
 
   // helpers
-  function normalizeHost(h) {
-    return (h || '')
+  function stripProtocolAndWww(s) {
+    return (s || '')
       .replace(/^https?:\/\//i, '')
       .replace(/^www\./i, '')
-      .split('/')[0]
       .toLowerCase();
+  }
+
+  // parse a site entry into { host, path } where path may be '' or '/home' or '?home'
+  function parseSiteEntry(site) {
+    var s = stripProtocolAndWww(site).trim();
+    var idx = s.indexOf('/');
+    if (idx === -1) {
+      return { host: s, path: '' };
+    } else {
+      return { host: s.slice(0, idx), path: s.slice(idx) }; // path includes leading '/'
+    }
   }
 
   // fallback for document.currentScript
@@ -42,31 +53,67 @@
     return s[s.length - 1] || null;
   })();
 
-  var currentHost = normalizeHost(location.hostname || location.host || '');
+  var currentHost = stripProtocolAndWww(location.hostname || location.host || '');
   var currentHref = (location.href || '').toLowerCase();
+  var currentPathname = (location.pathname || '').toLowerCase();
+  var currentSearch = (location.search || '').toLowerCase();
 
-  // robust match: match by hostname OR if the site string appears anywhere in the full URL
-  function siteMatches(site) {
-    if (!site) return false;
-    var siteNorm = normalizeHost(site);
-    if (siteNorm === currentHost) return true;
-    // also check if the normalized site appears in the full href (handles /?home, previews, proxies, path variants)
-    if (currentHref.indexOf(siteNorm) !== -1) return true;
+  // matching: host must match, and if site entry has a path (like /home or ?home) check it
+  function siteMatches(siteEntry) {
+    if (!siteEntry) return false;
+    var parsed = parseSiteEntry(siteEntry);
+    if (!parsed.host) return false;
+
+    // first: host equality
+    if (parsed.host !== currentHost) {
+      // sometimes previews/proxies include the site host in the full href; fallback to that check
+      if (currentHref.indexOf(parsed.host) === -1) return false;
+    }
+
+    // if entry has no path, host match is enough
+    if (!parsed.path) return true;
+
+    // path may be something like '/home' or '/some/path' or '/?home' (rare)
+    var path = parsed.path; // begins with '/'
+    // if path starts with '/?' or just '?', treat as search query
+    if (path.indexOf('/?') === 0) {
+      var q = path.slice(2); // after '/?'
+      if (currentSearch.indexOf(q) !== -1) return true;
+      if (currentHref.indexOf('?' + q) !== -1) return true;
+      return false;
+    }
+    if (path.indexOf('?') === 0) { // '?home' form
+      var q2 = path.slice(1);
+      if (currentSearch.indexOf(q2) !== -1) return true;
+      return false;
+    }
+
+    // normal path matching: accept exact pathname or pathname that starts with the path (handles trailing slashes)
+    if (currentPathname === path) return true;
+    if (currentPathname === path.replace(/\/$/, '')) return true;
+    if (currentPathname.indexOf(path) === 0) return true;
+
+    // fallback: full href contains host+path
+    if (currentHref.indexOf(parsed.host + path) !== -1) return true;
+
     return false;
   }
 
   // find index
   webring.idx = -1;
   for (var i = 0; i < webring.sites.length; i++) {
-    if (siteMatches(webring.sites[i])) {
-      webring.idx = i;
-      break;
+    try {
+      if (siteMatches(webring.sites[i])) {
+        webring.idx = i;
+        break;
+      }
+    } catch (e) {
+      // ignore and continue
     }
   }
 
   // safe injection: if body isn't ready, wait for DOMContentLoaded
   function doInject(html) {
-    // injection routine that will run when DOM is ready
     function injectNow() {
       try {
         if (!currentScript) {
@@ -85,12 +132,10 @@
           parent.removeChild(currentScript);
           console.debug('webring: injected after script (parent found).');
         } else if (document.body) {
-          // script without parent (rare): append to body
           (document.body || document.documentElement).appendChild(frag);
           try { currentScript.remove(); } catch (e) { /* ignore */ }
           console.debug('webring: injected to body (script had no parent).');
         } else {
-          // ultimate fallback
           (document.documentElement || document.body).appendChild(frag);
           try { currentScript.remove(); } catch (e) { /* ignore */ }
           console.debug('webring: injected to documentElement as ultimate fallback.');
@@ -101,7 +146,6 @@
     }
 
     if (document.readyState === 'loading') {
-      // DOM not ready — wait
       document.addEventListener('DOMContentLoaded', function onReady() {
         document.removeEventListener('DOMContentLoaded', onReady);
         injectNow();
@@ -113,7 +157,7 @@
 
   // selection & replacement
   if (webring.idx === -1) {
-    console.debug('webring: current site not found in list — showing error widget.');
+    console.debug('webring: current site not found in list — showing error widget. (host=' + currentHost + ', href=' + currentHref + ', pathname=' + currentPathname + ', search=' + currentSearch + ')');
     doInject(webring.widgets.error);
   } else {
     var n = webring.sites.length;
@@ -130,8 +174,8 @@
     }
 
     var html = webring.widgets[widgetKey] || webring.widgets.default;
-    var prevURL = 'https://' + normalizeHost(webring.sites[prevIndex]);
-    var nextURL = 'https://' + normalizeHost(webring.sites[nextIndex]);
+    var prevURL = 'https://' + stripProtocolAndWww(webring.sites[prevIndex]).split('/')[0];
+    var nextURL = 'https://' + stripProtocolAndWww(webring.sites[nextIndex]).split('/')[0];
     html = html.split('PREV').join(prevURL).split('NEXT').join(nextURL);
 
     console.debug('webring: injecting widget for index', webring.idx, 'prev:', prevURL, 'next:', nextURL);
