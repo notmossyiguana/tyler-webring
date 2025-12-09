@@ -8,10 +8,10 @@
       "mossyscorner.neocities.org",
       "jugproductions.neocities.org",
       "decahedron.neocities.org",
-      // changed to use /home (you asked). matching logic supports both /home and ?home.
       "oddfuturegirl.hotglue.me/home",
       "dazaisfunpalace.nekoweb.org",
-      "mewsdiary.nekoweb.org"
+      "mewsdiary.nekoweb.org",
+      "mishcoded.nekoweb.org" 
     ],
     widgets: {
       default: ''
