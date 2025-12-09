@@ -1,5 +1,5 @@
 // webring widget script — fixes matching for /home (and still tolerates ?home)
-// made from webstring by juneish - modified by mossy
+// made from webstring by juneish - modified by mossy - FIXED
 (function () {
   'use strict';
 
@@ -11,7 +11,7 @@
       "oddfuturegirl.hotglue.me/home",
       "dazaisfunpalace.nekoweb.org",
       "mewsdiary.nekoweb.org",
-      "mishcoded.nekoweb.org" 
+      "mishcoded.nekoweb.org"
     ],
     widgets: {
       default: ''
@@ -33,18 +33,35 @@
     return (s || '')
       .replace(/^https?:\/\//i, '')
       .replace(/^www\./i, '')
-      .toLowerCase();
+      .toLowerCase()
+      .trim();
   }
 
-  // parse a site entry into { host, path } where path may be '' or '/home' or '?home'
+  // parse a site entry into { host, path } where path may be '' or '/home' or '?home' or '/?home'
   function parseSiteEntry(site) {
-    var s = stripProtocolAndWww(site).trim();
-    var idx = s.indexOf('/');
-    if (idx === -1) {
+    var s = stripProtocolAndWww(site || '');
+    if (!s) return { host: '', path: '' };
+
+    // find first slash or question-mark (whichever comes first, after hostname)
+    var firstSlash = s.indexOf('/');
+    var firstQ = s.indexOf('?');
+
+    // neither found -> host only
+    if (firstSlash === -1 && firstQ === -1) {
       return { host: s, path: '' };
-    } else {
-      return { host: s.slice(0, idx), path: s.slice(idx) }; // path includes leading '/'
     }
+
+    // question mark comes before slash (or no slash) -> host then query (like "site?home" or "site/?home" -> we handle both)
+    if ((firstQ !== -1 && firstSlash === -1) || (firstQ !== -1 && firstQ < firstSlash)) {
+      var hostPart = s.slice(0, firstQ);
+      var pathPart = s.slice(firstQ); // begins with '?'
+      return { host: hostPart, path: pathPart };
+    }
+
+    // otherwise slash exists and comes first -> host and path starting with '/'
+    var hostPart = s.slice(0, firstSlash);
+    var pathPart = s.slice(firstSlash); // includes leading '/'
+    return { host: hostPart, path: pathPart };
   }
 
   // fallback for document.currentScript
@@ -64,27 +81,29 @@
     var parsed = parseSiteEntry(siteEntry);
     if (!parsed.host) return false;
 
-    // first: host equality
+    // host equality: best-effort: exact hostname OR contained in full href (for previews)
     if (parsed.host !== currentHost) {
-      // sometimes previews/proxies include the site host in the full href; fallback to that check
       if (currentHref.indexOf(parsed.host) === -1) return false;
     }
 
     // if entry has no path, host match is enough
     if (!parsed.path) return true;
 
-    // path may be something like '/home' or '/some/path' or '/?home' (rare)
-    var path = parsed.path; // begins with '/'
-    // if path starts with '/?' or just '?', treat as search query
+    var path = parsed.path; // may start with '/' or '?'
+
+    // handle '/?query' (path starts with '/?')
     if (path.indexOf('/?') === 0) {
       var q = path.slice(2); // after '/?'
       if (currentSearch.indexOf(q) !== -1) return true;
       if (currentHref.indexOf('?' + q) !== -1) return true;
       return false;
     }
-    if (path.indexOf('?') === 0) { // '?home' form
+
+    // handle '?query' form (no leading slash)
+    if (path.indexOf('?') === 0) {
       var q2 = path.slice(1);
       if (currentSearch.indexOf(q2) !== -1) return true;
+      if (currentHref.indexOf('?' + q2) !== -1) return true;
       return false;
     }
 
@@ -109,6 +128,7 @@
       }
     } catch (e) {
       // ignore and continue
+      console.error('webring: matching error for site', webring.sites[i], e);
     }
   }
 
@@ -129,7 +149,7 @@
 
         if (parent) {
           parent.insertBefore(frag, currentScript.nextSibling);
-          parent.removeChild(currentScript);
+          try { parent.removeChild(currentScript); } catch (e) { /* ignore */ }
           console.debug('webring: injected after script (parent found).');
         } else if (document.body) {
           (document.body || document.documentElement).appendChild(frag);
@@ -157,7 +177,8 @@
 
   // selection & replacement
   if (webring.idx === -1) {
-    console.debug('webring: current site not found in list — showing error widget. (host=' + currentHost + ', href=' + currentHref + ', pathname=' + currentPathname + ', search=' + currentSearch + ')');
+    console.debug('webring: current site not found in list — showing error widget.',
+      'host=' + currentHost, 'href=' + currentHref, 'pathname=' + currentPathname, 'search=' + currentSearch);
     doInject(webring.widgets.error);
   } else {
     var n = webring.sites.length;
@@ -174,8 +195,14 @@
     }
 
     var html = webring.widgets[widgetKey] || webring.widgets.default;
-    var prevURL = 'https://' + stripProtocolAndWww(webring.sites[prevIndex]).split('/')[0];
-    var nextURL = 'https://' + stripProtocolAndWww(webring.sites[nextIndex]).split('/')[0];
+
+    // use parsed host+path so PREV/NEXT keep their paths (e.g. /home)
+    var prevParsed = parseSiteEntry(webring.sites[prevIndex]);
+    var nextParsed = parseSiteEntry(webring.sites[nextIndex]);
+
+    var prevURL = 'https://' + prevParsed.host + (prevParsed.path || '');
+    var nextURL = 'https://' + nextParsed.host + (nextParsed.path || '');
+
     html = html.split('PREV').join(prevURL).split('NEXT').join(nextURL);
 
     console.debug('webring: injecting widget for index', webring.idx, 'prev:', prevURL, 'next:', nextURL);
