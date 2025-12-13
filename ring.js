@@ -11,7 +11,8 @@
       "oddfuturegirl.hotglue.me/home",
       "dazaisfunpalace.nekoweb.org",
       "mewsdiary.nekoweb.org",
-      "mishcoded.nekoweb.org"
+      "mishcoded.nekoweb.org",
+      "ntraitor.neocities.org"
     ],
     widgets: {
       default: ''
