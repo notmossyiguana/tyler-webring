@@ -41,5 +41,11 @@
     "site": "https://mishcoded.nekoweb.org/",
     "blurb": "A personal site where I get a little silly",
     "button": "mishcoded.png"
+  },
+  {
+    "name": "Q",
+    "site": "http://ntraitor.neocities.org/",
+    "blurb": "It's a personal website meant to showcase my interests. It's also just a way to practice coding.",
+    "button": "nobuttonprovided.png"
   }
 ]
