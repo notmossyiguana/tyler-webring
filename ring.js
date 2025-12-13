@@ -1,5 +1,5 @@
-// webring widget script — fixes matching for /home (and still tolerates ?home)
-// made from webstring by juneish - modified by mossy - FIXED
+// webring widget script
+// made from webstring by juneish - modified by mossy
 (function () {
   'use strict';
 
