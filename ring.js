@@ -5,7 +5,7 @@
 
   var webring = {
     sites: [
-      "mossyscorner.neocities.org/webring"
+      "mossyscorner.neocities.org/webring",
       "mossyscorner.neocities.org",
       "jugproductions.neocities.org",
       "decahedron.neocities.org",
