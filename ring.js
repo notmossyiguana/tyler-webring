@@ -12,7 +12,8 @@
       "dazaisfunpalace.nekoweb.org",
       "mewsdiary.nekoweb.org",
       "mishcoded.nekoweb.org",
-      "ntraitor.neocities.org"
+      "ntraitor.neocities.org",
+      "warak.neocities.org"
     ],
     widgets: {
       default: ''
