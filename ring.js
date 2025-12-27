@@ -14,7 +14,8 @@
       "mishcoded.nekoweb.org",
       "ntraitor.neocities.org",
       "warak.neocities.org",
-      "chubs.tubsandchubs.com" 
+      "chubs.tubsandchubs.com",
+      "sunnishinez.neocities.org" 
     ],
     widgets: {
       default: ''
