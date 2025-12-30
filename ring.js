@@ -27,7 +27,7 @@
         + '</div>',
       error: ''
         + '<div>'
-        + '  <a href="https://mossyscorner.neocities.org/webring" target="_top"><img src="https://mossyscorner.neocities.org/widget/button.png" alt="webring button"></a>'
+        + '  <a href="https://mossyscorner.neocities.org/webring" target="_top"><img src="https://mossyscorner.neocities.org/widget/button.svg" alt="webring button"></a>'
         + '  <div style="font-size: 0.75em; text-align: center">(this site is not part of the Tyler, The Creator webring quite yet)</div>'
         + '</div>'
     }
