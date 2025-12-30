@@ -1,4 +1,4 @@
-// webring widget script
+// webring script
 // made from webstring by juneish - modified by mossy
 (function () {
   'use strict';
