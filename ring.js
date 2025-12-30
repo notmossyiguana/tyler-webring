@@ -69,7 +69,7 @@
     return { host: hostPart, path: pathPart };
   }
 
-  // fallback for document.currentScript
+
   var currentScript = document.currentScript || (function () {
     var s = document.getElementsByTagName('script');
     return s[s.length - 1] || null;
