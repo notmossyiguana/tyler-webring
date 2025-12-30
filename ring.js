@@ -16,7 +16,7 @@
       "warak.neocities.org",
       "chubs.tubsandchubs.com",
       "sunnishinez.neocities.org",
-      "sweetcherries.neocities.org",
+      "sweetcherries.neocities.org"
     ],
     widgets: {
       default: ''
