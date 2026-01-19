@@ -17,7 +17,7 @@
       "chubs.tubsandchubs.com",
       "sunnishinez.neocities.org",
       "sweetcherries.neocities.org",
-      "kuradoberi.nekoweb.org"
+      "kuradoberi.nyc"
     ],
     widgets: {
       default: ''
