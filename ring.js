@@ -16,7 +16,8 @@
       "warak.neocities.org",
       "chubs.tubsandchubs.com",
       "sunnishinez.neocities.org",
-      "sweetcherries.neocities.org"
+      "sweetcherries.neocities.org",
+      "kuradoberi.nekoweb.org"
     ],
     widgets: {
       default: ''
