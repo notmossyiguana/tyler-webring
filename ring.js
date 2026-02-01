@@ -13,7 +13,6 @@
       "mewsdiary.nekoweb.org",
       "mishcoded.nekoweb.org",
       "ntraitor.neocities.org",
-      "warak.neocities.org",
       "chubs.tubsandchubs.com",
       "sunnishinez.neocities.org",
       "sweetcherries.neocities.org",
