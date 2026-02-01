@@ -7,7 +7,7 @@
     sites: [
       "mossyscorner.neocities.org",
       "jugproductions.neocities.org",
-      "decahedron.neocities.org",
+      "decahedron.eu",
       "oddfuturegirl.hotglue.me/home",
       "dazaisfunpalace.nekoweb.org",
       "mewsdiary.nekoweb.org",
