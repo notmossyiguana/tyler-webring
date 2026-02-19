@@ -17,7 +17,8 @@
       "sunnishinez.neocities.org",
       "sweetcherries.neocities.org",
       "kuradoberi.nyc",
-      "klilo.neocities.org" 
+      "klilo.neocities.org"
+      "lyer-online.neocities.org",
     ],
     widgets: {
       default: ''
