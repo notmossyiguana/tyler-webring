@@ -18,7 +18,8 @@
       "sweetcherries.neocities.org",
       "kuradoberi.nyc",
       "klilo.neocities.org",
-      "lyer-online.neocities.org"
+      "lyer-online.neocities.org",
+      "heck.nekoweb.org"
     ],
     widgets: {
       default: ''
