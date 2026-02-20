@@ -82,5 +82,11 @@
     "site": "https://lyer-online.neocities.org/",
     "blurb": "music enthusiast, fandom connoisseur, movie buff, and general nerd",
     "button": "lyer-button.gif"
+  },
+  {
+    "name": "izby",
+    "site": "https://heck.nekoweb.org/",
+    "blurb": "a thing on the internet~",
+    "button": "heck.png"
   }
 ]
