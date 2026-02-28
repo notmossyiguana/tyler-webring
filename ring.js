@@ -19,7 +19,8 @@
       "kuradoberi.nyc",
       "klilo.neocities.org",
       "lyer-online.neocities.org",
-      "heck.nekoweb.org"
+      "heck.nekoweb.org",
+      "6208why.neocities.org"
     ],
     widgets: {
       default: ''
