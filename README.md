@@ -17,6 +17,8 @@ Make a pull request to merge `members.json`, and copy this template in:
 ```
 Remember to add a comma on the previous member!
 
+Then, add your site link to `ring.js`
+
 **Option 2 — Email**
 
 Send an email to **tylerwebring [at] duck [dot] com**
@@ -27,4 +29,4 @@ Your email should include:
 * Your site URL
 * Your name or alias
 * A short blurb describing your website (1–2 sentences)
-* Your website’s button URL (optional)
+* Your 88x31 button URL (optional)
