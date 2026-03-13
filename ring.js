@@ -20,7 +20,8 @@
       "klilo.neocities.org",
       "lyer-online.neocities.org",
       "heck.nekoweb.org",
-      "6208why.neocities.org"
+      "6208why.neocities.org",
+      "saturnlmao.neocities.org" 
     ],
     widgets: {
       default: ''
