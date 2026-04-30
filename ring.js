@@ -21,7 +21,8 @@
       "lyer-online.neocities.org",
       "heck.nekoweb.org",
       "6208why.neocities.org",
-      "astrokid425.neocities.org" 
+      "astrokid425.neocities.org",
+      "lopster.neocities.org" 
     ],
     widgets: {
       default: ''
