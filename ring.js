@@ -11,7 +11,7 @@
       "oddfuturegirl.hotglue.me/home",
       "dazaisfunpalace.nekoweb.org",
       "mewsdiary.nekoweb.org",
-      "mishcoded.nekoweb.org",
+      "mishcoded.lol",
       "ntraitor.neocities.org",
       "chubs.tubsandchubs.com",
       "sunnishinez.neocities.org",
