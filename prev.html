@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tyler Webring — previous site</title>
+<meta name="robots" content="noindex">
+<style>
+  body { font-family: sans-serif; max-width: 480px; margin: 80px auto; padding: 0 24px; color: #333; text-align: center; }
+  a { color: #7c5cbf; }
+  .err { background: #fdf2f8; border: 1px solid #e8c8e8; border-radius: 8px; padding: 24px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<p>Redirecting to the previous site in the <a href="https://mossyscorner.neocities.org/webring">Tyler, The Creator webring</a>...</p>
+<div class="err" id="err" style="display:none">
+  <strong>Hmm, something went wrong.</strong><br><br>
+  <span id="errmsg">The site that sent you here doesn't seem to be part of the webring.</span><br><br>
+  <a href="https://mossyscorner.neocities.org/webring">Go to the webring index</a>
+</div>
+<script>
+(function () {
+  var SITES = [
+    "mossyscorner.neocities.org",
+    "jugproductions.neocities.org",
+    "decahedron.eu",
+    "oddfuturegirl.hotglue.me/home",
+    "dazaisfunpalace.nekoweb.org",
+    "mewsdiary.nekoweb.org",
+    "mishcoded.nekoweb.org",
+    "ntraitor.neocities.org",
+    "chubs.tubsandchubs.com",
+    "sunnishinez.neocities.org",
+    "sweetcherries.neocities.org",
+    "kuradoberi.nyc",
+    "klilo.neocities.org",
+    "lyer-online.neocities.org",
+    "heck.nekoweb.org",
+    "6208why.neocities.org",
+    "astrokid425.neocities.org",
+    "lopster.neocities.org"
+  ];
+
+  function strip(s) {
+    return (s || '').replace(/^https?:\/\//i, '').replace(/^www\./i, '').toLowerCase().trim();
+  }
+
+  function parseSite(site) {
+    var s = strip(site || '');
+    if (!s) return { host: '', path: '' };
+    var fi = s.indexOf('/'), fq = s.indexOf('?');
+    if (fi === -1 && fq === -1) return { host: s, path: '' };
+    if ((fq !== -1 && fi === -1) || (fq !== -1 && fq < fi))
+      return { host: s.slice(0, fq), path: s.slice(fq) };
+    return { host: s.slice(0, fi), path: s.slice(fi) };
+  }
+
+  // Strict match: the via param must equal the registered entry exactly
+  // (after stripping protocol/www). This prevents spoofing — you can only
+  // claim to be a site that's actually in the list, and only using the
+  // exact string that was registered.
+  function findIndex(via) {
+    var v = strip(via);
+    for (var i = 0; i < SITES.length; i++) {
+      if (strip(SITES[i]) === v) return i;
+    }
+    return -1;
+  }
+
+  function showError(msg) {
+    document.getElementById('err').style.display = '';
+    if (msg) document.getElementById('errmsg').textContent = msg;
+  }
+
+  var params = new URLSearchParams(location.search);
+  var via = params.get('via');
+
+  if (!via) {
+    showError('No "via" parameter was provided. This link needs to come from a webring member site.');
+    return;
+  }
+
+  var idx = findIndex(via);
+  if (idx === -1) {
+    showError('"' + via + '" is not in the Tyler webring. Only member sites can use these navigation links.');
+    return;
+  }
+
+  var n = SITES.length;
+  var target = parseSite(SITES[(idx - 1 + n) % n]);
+  var url = 'https://' + target.host + (target.path || '');
+  window.location.replace(url);
+})();
+</script>
+</body>
+</html>

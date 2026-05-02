@@ -22,7 +22,7 @@
       "heck.nekoweb.org",
       "6208why.neocities.org",
       "astrokid425.neocities.org",
-      "lopster.neocities.org" 
+      "lopster.neocities.org"
     ],
     widgets: {
       default: ''
@@ -53,25 +53,21 @@
     var s = stripProtocolAndWww(site || '');
     if (!s) return { host: '', path: '' };
 
-    // find first slash or question-mark (whichever comes first, after hostname)
     var firstSlash = s.indexOf('/');
     var firstQ = s.indexOf('?');
 
-    // neither found -> host only
     if (firstSlash === -1 && firstQ === -1) {
       return { host: s, path: '' };
     }
 
-    // question mark comes before slash (or no slash) -> host then query (like "site?home" or "site/?home" -> we handle both)
     if ((firstQ !== -1 && firstSlash === -1) || (firstQ !== -1 && firstQ < firstSlash)) {
       var hostPart = s.slice(0, firstQ);
-      var pathPart = s.slice(firstQ); // begins with '?'
+      var pathPart = s.slice(firstQ);
       return { host: hostPart, path: pathPart };
     }
 
-    // otherwise slash exists and comes first -> host and path starting with '/'
     var hostPart = s.slice(0, firstSlash);
-    var pathPart = s.slice(firstSlash); // includes leading '/'
+    var pathPart = s.slice(firstSlash);
     return { host: hostPart, path: pathPart };
   }
 
@@ -92,25 +88,21 @@
     var parsed = parseSiteEntry(siteEntry);
     if (!parsed.host) return false;
 
-    // host equality: best-effort: exact hostname OR contained in full href (for previews)
     if (parsed.host !== currentHost) {
       if (currentHref.indexOf(parsed.host) === -1) return false;
     }
 
-    // if entry has no path, host match is enough
     if (!parsed.path) return true;
 
-    var path = parsed.path; // may start with '/' or '?'
+    var path = parsed.path;
 
-    // handle '/?query' (path starts with '/?')
     if (path.indexOf('/?') === 0) {
-      var q = path.slice(2); // after '/?'
+      var q = path.slice(2);
       if (currentSearch.indexOf(q) !== -1) return true;
       if (currentHref.indexOf('?' + q) !== -1) return true;
       return false;
     }
 
-    // handle '?query' form (no leading slash)
     if (path.indexOf('?') === 0) {
       var q2 = path.slice(1);
       if (currentSearch.indexOf(q2) !== -1) return true;
@@ -118,12 +110,10 @@
       return false;
     }
 
-    // normal path matching: accept exact pathname or pathname that starts with the path (handles trailing slashes)
     if (currentPathname === path) return true;
     if (currentPathname === path.replace(/\/$/, '')) return true;
     if (currentPathname.indexOf(path) === 0) return true;
 
-    // fallback: full href contains host+path
     if (currentHref.indexOf(parsed.host + path) !== -1) return true;
 
     return false;
@@ -138,10 +128,43 @@
         break;
       }
     } catch (e) {
-      // ignore and continue
       console.error('webring: matching error for site', webring.sites[i], e);
     }
   }
+
+  // --- nav helper URLs ---
+  // Exposes webring.nav for members who want to build their own custom widget.
+  // webring.nav.prev, .next, .random are redirect URLs that handle navigation
+  // server-side via the ?via= param. Only set when the current site is a member.
+  // Non-members get null so they can't abuse the redirect pages.
+  var BASE = 'https://mossyscorner.neocities.org/webring';
+
+  if (webring.idx !== -1) {
+    var n = webring.sites.length;
+    var prevParsed = parseSiteEntry(webring.sites[(webring.idx - 1 + n) % n]);
+    var nextParsed = parseSiteEntry(webring.sites[(webring.idx + 1) % n]);
+
+    // Build a clean "host+path" identifier for the via param — just the
+    // registered entry, no https://, so redirect pages can match it exactly.
+    var viaSelf = stripProtocolAndWww(webring.sites[webring.idx]);
+
+    webring.nav = {
+      prev:   BASE + '/prev?via=' + encodeURIComponent(viaSelf),
+      next:   BASE + '/next?via=' + encodeURIComponent(viaSelf),
+      // also expose the direct URLs in case someone wants them
+      prevURL:   'https://' + prevParsed.host + (prevParsed.path || ''),
+      nextURL:   'https://' + nextParsed.host + (nextParsed.path || ''),
+    };
+    console.debug('webring: nav URLs available at webring.nav', webring.nav);
+  } else {
+    webring.nav = null;
+    console.debug('webring: not a member site, webring.nav is null');
+  }
+
+  // expose on window so custom widgets can read it
+  window.webring = webring;
+  // --- end nav helper ---
+
 
   // safe injection: if body isn't ready, wait for DOMContentLoaded
   function doInject(html) {
@@ -160,15 +183,15 @@
 
         if (parent) {
           parent.insertBefore(frag, currentScript.nextSibling);
-          try { parent.removeChild(currentScript); } catch (e) { /* ignore */ }
+          try { parent.removeChild(currentScript); } catch (e) { }
           console.debug('webring: injected after script (parent found).');
         } else if (document.body) {
           (document.body || document.documentElement).appendChild(frag);
-          try { currentScript.remove(); } catch (e) { /* ignore */ }
+          try { currentScript.remove(); } catch (e) { }
           console.debug('webring: injected to body (script had no parent).');
         } else {
           (document.documentElement || document.body).appendChild(frag);
-          try { currentScript.remove(); } catch (e) { /* ignore */ }
+          try { currentScript.remove(); } catch (e) { }
           console.debug('webring: injected to documentElement as ultimate fallback.');
         }
       } catch (err) {
@@ -207,12 +230,11 @@
 
     var html = webring.widgets[widgetKey] || webring.widgets.default;
 
-    // use parsed host+path so PREV/NEXT keep their paths (e.g. /home)
-    var prevParsed = parseSiteEntry(webring.sites[prevIndex]);
-    var nextParsed = parseSiteEntry(webring.sites[nextIndex]);
+    var prevParsedW = parseSiteEntry(webring.sites[prevIndex]);
+    var nextParsedW = parseSiteEntry(webring.sites[nextIndex]);
 
-    var prevURL = 'https://' + prevParsed.host + (prevParsed.path || '');
-    var nextURL = 'https://' + nextParsed.host + (nextParsed.path || '');
+    var prevURL = 'https://' + prevParsedW.host + (prevParsedW.path || '');
+    var nextURL = 'https://' + nextParsedW.host + (nextParsedW.path || '');
 
     html = html.split('PREV').join(prevURL).split('NEXT').join(nextURL);
 
