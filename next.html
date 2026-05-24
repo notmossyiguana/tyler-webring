@@ -9,7 +9,6 @@
   a { color: #7c5cbf; }
   .err { background: #fdf2f8; border: 1px solid #e8c8e8; border-radius: 8px; padding: 24px; margin-top: 32px; }
 </style>
-<script src="/sites.js"></script>
 </head>
 <body>
 <p>Redirecting to the next site in the <a href="https://mossyscorner.neocities.org/webring">Tyler, The Creator webring</a>...</p>
@@ -20,7 +19,6 @@
 </div>
 <script>
 (function () {
-  var SITES = window.WEBRING_SITES;
   function strip(s) {
     return (s || '').replace(/^https?:\/\//i, '').replace(/^www\./i, '').toLowerCase().trim();
   }
@@ -33,7 +31,7 @@
       return { host: s.slice(0, fq), path: s.slice(fq) };
     return { host: s.slice(0, fi), path: s.slice(fi) };
   }
-  function findIndex(via) {
+  function findIndex(SITES, via) {
     var v = strip(via);
     for (var i = 0; i < SITES.length; i++) {
       if (strip(SITES[i]) === v) return i;
@@ -44,14 +42,24 @@
     document.getElementById('err').style.display = '';
     if (msg) document.getElementById('errmsg').textContent = msg;
   }
+
   var params = new URLSearchParams(location.search);
   var via = params.get('via');
   if (!via) { showError('No "via" parameter was provided. This link needs to come from a webring member site.'); return; }
-  var idx = findIndex(via);
-  if (idx === -1) { showError('"' + via + '" is not in the Tyler webring. Only member sites can use these navigation links.'); return; }
-  var n = SITES.length;
-  var target = parseSite(SITES[(idx + 1) % n]);
-  window.location.replace('https://' + target.host + (target.path || ''));
+
+  fetch('https://mossyscorner.neocities.org/widget/ring.js')
+    .then(function(r) { return r.text(); })
+    .then(function(src) {
+      var match = src.match(/sites\s*:\s*(\[[\s\S]*?\])/);
+      if (!match) { showError('Could not read the site list from ring.js.'); return; }
+      var SITES = JSON.parse(match[1].replace(/'/g, '"'));
+      var idx = findIndex(SITES, via);
+      if (idx === -1) { showError('"' + via + '" is not in the Tyler webring. Only member sites can use these navigation links.'); return; }
+      var n = SITES.length;
+      var target = parseSite(SITES[(idx + 1) % n]);
+      window.location.replace('https://' + target.host + (target.path || ''));
+    })
+    .catch(function() { showError('Could not load ring.js to get the site list.'); });
 })();
 </script>
 </body>
