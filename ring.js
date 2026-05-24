@@ -4,7 +4,28 @@
   'use strict';
 
   var webring = {
-    sites: window.WEBRING_SITES,
+    sites: [
+      "mossyscorner.neocities.org",
+      "jugproductions.neocities.org",
+      "decahedron.eu",
+      "oddfuturegirl.hotglue.me/home",
+      "dazaisfunpalace.nekoweb.org",
+      "mewsdiary.nekoweb.org",
+      "mishcoded.lol",
+      "ntraitor.neocities.org",
+      "chubs.tubsandchubs.com",
+      "sunnishinez.neocities.org",
+      "sweetcherries.neocities.org",
+      "kuradoberi.nyc",
+      "klilo.neocities.org",
+      "lyer-online.neocities.org",
+      "heck.nekoweb.org",
+      "6208why.neocities.org",
+      "astrokid425.neocities.org",
+      "lopster.neocities.org",
+      "miaomiao.nekoweb.org",
+      "crydamoure.nekoweb.org"
+    ],
     widgets: {
       default: ''
         + '<div id="tyler-ring" style="display: flex; align-items: center; gap: 3.278%; max-width: 244px; image-rendering: smooth">'
