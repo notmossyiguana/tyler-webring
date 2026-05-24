@@ -22,7 +22,9 @@
       "heck.nekoweb.org",
       "6208why.neocities.org",
       "astrokid425.neocities.org",
-      "lopster.neocities.org"
+      "lopster.neocities.org",
+      "miaomiao.nekoweb.org",
+      "crydamoure.nekoweb.org"
     ],
     widgets: {
       default: ''
@@ -144,8 +146,6 @@
     var prevParsed = parseSiteEntry(webring.sites[(webring.idx - 1 + n) % n]);
     var nextParsed = parseSiteEntry(webring.sites[(webring.idx + 1) % n]);
 
-    // Build a clean "host+path" identifier for the via param — just the
-    // registered entry, no https://, so redirect pages can match it exactly.
     var viaSelf = stripProtocolAndWww(webring.sites[webring.idx]);
 
     webring.nav = {
@@ -163,7 +163,6 @@
 
   // expose on window so custom widgets can read it
   window.webring = webring;
-  // --- end nav helper ---
 
 
   // safe injection: if body isn't ready, wait for DOMContentLoaded
