@@ -47,7 +47,7 @@
   var via = params.get('via');
   if (!via) { showError('No "via" parameter was provided. This link needs to come from a webring member site.'); return; }
 
-  fetch('https://mossyscorner.neocities.org/widget/ring.js')
+  fetch('https://raw.githubusercontent.com/notmossyiguana/tyler-webring/refs/heads/main/ring.js')
     .then(function(r) { return r.text(); })
     .then(function(src) {
       var match = src.match(/sites\s*:\s*(\[[\s\S]*?\])/);
