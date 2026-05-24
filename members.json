@@ -106,5 +106,17 @@
     "site": "https://lopster.neocities.org/",
     "blurb": "look at my site boy",
     "button": "lopster.gif"
+  },
+  {
+    "name": "miaomiao",
+    "site": "https://miaomiao.nekoweb.org/",
+    "blurb": "a personal website!",
+    "button": "miaomiao.gif"
+  },
+  {
+    "name": "shen",
+    "site": "https://crydamoure.nekoweb.org/",
+    "blurb": "lover of all things robotic. french touch is my favorite genre, i'm always finding new friends and new music to listen to no matter the day",
+    "button": "crydamoure.png"
   }
 ]
