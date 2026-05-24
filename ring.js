@@ -1,5 +1,5 @@
 // webring script
-// made from webstring by juneish - modified by mossy
+// made from webstring by juneish - heavily modified by mossy
 (function () {
   'use strict';
 
