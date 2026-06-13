@@ -22,7 +22,6 @@
       "heck.nekoweb.org",
       "6208why.neocities.org",
       "astrokid425.neocities.org",
-      "lopster.neocities.org",
       "miaomiao.nekoweb.org",
       "crydamoure.nekoweb.org"
     ],
