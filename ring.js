@@ -23,7 +23,8 @@
       "6208why.neocities.org",
       "astrokid425.neocities.org",
       "miaomiao.nekoweb.org",
-      "crydamoure.nekoweb.org"
+      "crydamoure.nekoweb.org",
+      "thesoapyhell.neocities.org"
     ],
     widgets: {
       default: ''
