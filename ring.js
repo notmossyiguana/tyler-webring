@@ -24,7 +24,8 @@
       "astrokid425.neocities.org",
       "miaomiao.nekoweb.org",
       "crydamoure.nekoweb.org",
-      "thesoapyhell.neocities.org"
+      "thesoapyhell.neocities.org",
+      "sol-net.neocities.org"
     ],
     widgets: {
       default: ''
