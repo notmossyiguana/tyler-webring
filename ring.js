@@ -25,7 +25,8 @@
       "miaomiao.nekoweb.org",
       "crydamoure.nekoweb.org",
       "thesoapyhell.neocities.org",
-      "sol-net.neocities.org"
+      "sol-net.neocities.org",
+      "dogrise.net"
     ],
     widgets: {
       default: ''
